@@ -3,8 +3,8 @@ import { motion } from 'motion/react';
 import { ArrowRight, Star } from 'lucide-react';
 
 // Import local screenshots for the hero
-import homeImg from '../screenshots/home.jpg';
-import socialsImg from '../screenshots/socials.jpg';
+import homeImg from '../assets/screenshots/home.png';
+import socialsImg from '../assets/screenshots/socials.png';
 
 const Reveal: React.FC<{ children: React.ReactNode; delay?: number }> = ({ children, delay = 0 }) => {
   return (
@@ -50,12 +50,12 @@ export const Community = () => {
         <div className="flex gap-6 items-start shrink-0">
           <Reveal delay={0.3}>
             <div className="lp w-[185px] rounded-[36px] overflow-hidden shadow-2xl relative">
-              <img src={homeImg} alt="Selah home" className="w-full block" referrerPolicy="no-referrer" />
+              <img src={homeImg} alt="Selah home" className="w-full block" />
             </div>
           </Reveal>
           <Reveal delay={0.4}>
             <div className="lp main w-[210px] -mt-5 rounded-[36px] overflow-hidden shadow-2xl relative">
-              <img src={socialsImg} alt="Selah socials" className="w-full block" referrerPolicy="no-referrer" />
+              <img src={socialsImg} alt="Selah socials" className="w-full block" />
             </div>
           </Reveal>
         </div>

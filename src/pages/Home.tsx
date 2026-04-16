@@ -14,11 +14,11 @@ import {
 } from 'lucide-react';
 
 // Import local screenshots
-import homeImg from '../screenshots/home.jpg';
-import readerImg from '../screenshots/reader.jpg';
-import notesImg from '../screenshots/notes.jpg';
-import socialsImg from '../screenshots/socials.jpg';
-import profileImg from '../screenshots/profile.jpg';
+import homeImg from '../assets/screenshots/home.png';
+import readerImg from '../assets/screenshots/reader.png';
+import notesImg from '../assets/screenshots/notes.png';
+import socialsImg from '../assets/screenshots/socials.png';
+import profileImg from '../assets/screenshots/profile.png';
 
 const Reveal: React.FC<{ children: React.ReactNode; delay?: number }> = ({ children, delay = 0 }) => {
   return (
@@ -120,7 +120,7 @@ export const Home = () => {
             animate={{ y: [0, -22, 0], rotate: [-2, -2, -2] }}
             transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
           >
-            <img src={homeImg} alt="Selah home screen" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+            <img src={homeImg} alt="Selah home screen" className="w-full h-full object-cover" />
           </motion.div>
           
           <motion.div 
@@ -128,7 +128,7 @@ export const Home = () => {
             animate={{ y: [0, -16, 0], rotate: [3.5, 3.5, 3.5] }}
             transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
           >
-            <img src={readerImg} alt="Selah Bible reader" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+            <img src={readerImg} alt="Selah Bible reader" className="w-full h-full object-cover" />
           </motion.div>
 
           <motion.div 
@@ -136,7 +136,7 @@ export const Home = () => {
             animate={{ y: [0, -10, 0], rotate: [1, 1, 1] }}
             transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
           >
-            <img src={notesImg} alt="Selah notes" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+            <img src={notesImg} alt="Selah notes" className="w-full h-full object-cover" />
           </motion.div>
         </div>
       </section>
@@ -228,7 +228,7 @@ export const Home = () => {
             <Reveal key={idx} delay={idx * 0.1}>
               <div className="flex flex-col items-center gap-4">
                 <div className="iphone-card">
-                  <img src={screen.url} alt={screen.label} className="w-full h-full object-cover object-top" referrerPolicy="no-referrer" />
+                  <img src={screen.url} alt={screen.label} className="w-full h-full object-cover object-top" />
                 </div>
                 <span className="text-[0.7rem] font-medium tracking-widest uppercase text-text-dim">{screen.label}</span>
               </div>
@@ -269,7 +269,7 @@ export const Home = () => {
           <div className="flex justify-center">
             <Reveal delay={0.2}>
               <div className="screen-phone">
-                <img src={readerImg} alt="Bible reader" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                <img src={readerImg} alt="Bible reader" className="w-full h-full object-cover" />
               </div>
             </Reveal>
           </div>
@@ -282,7 +282,7 @@ export const Home = () => {
           <div className="order-2 lg:order-1 flex justify-center">
             <Reveal delay={0.2}>
               <div className="screen-phone">
-                <img src={socialsImg} alt="Community feed" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                <img src={socialsImg} alt="Community feed" className="w-full h-full object-cover" />
               </div>
             </Reveal>
           </div>
