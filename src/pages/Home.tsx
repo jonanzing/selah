@@ -14,11 +14,11 @@ import {
 } from 'lucide-react';
 
 // Import local screenshots
-import homeImg from '../screenshots/home.png.jpg';
-import readerImg from '../screenshots/reader.png.jpg';
-import notesImg from '../screenshots/notes.png.jpg';
-import socialsImg from '../screenshots/socials.png.jpg';
-import profileImg from '../screenshots/profile.png.jpg';
+import homeImg from '../screenshots/home.jpg';
+import readerImg from '../screenshots/reader.jpg';
+import notesImg from '../screenshots/notes.jpg';
+import socialsImg from '../screenshots/socials.jpg';
+import profileImg from '../screenshots/profile.jpg';
 
 const Reveal: React.FC<{ children: React.ReactNode; delay?: number }> = ({ children, delay = 0 }) => {
   return (
@@ -34,51 +34,18 @@ const Reveal: React.FC<{ children: React.ReactNode; delay?: number }> = ({ child
 };
 
 export const Home = () => {
-  const [formData, setFormData] = useState({ email: '', name: '', platform: 'iOS' });
-  const [status, setStatus] = useState({ type: '', msg: 'No spam, ever. Just your personal invite when it\'s time.' });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [email, setEmail] = useState('');
+  const [wlMsg, setWlMsg] = useState({ text: 'No spam, ever. Just your personal invite when it\'s time.', color: 'dim' });
 
-  const joinList = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const { email, name, platform } = formData;
-
-    if (!email || !email.includes('@')) {
-      setStatus({ type: 'error', msg: 'Please enter a valid email address.' });
+  const joinList = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    const v = email.trim();
+    if (!v || !v.includes('@') || !v.includes('.')) {
+      setWlMsg({ text: 'Please enter a valid email address.', color: 'red' });
       return;
     }
-
-    setIsSubmitting(true);
-    setStatus({ type: 'loading', msg: 'Joining waitlist...' });
-
-    try {
-      const scriptUrl = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
-      
-      if (!scriptUrl) {
-        // Fallback for demo if URL not set
-        setTimeout(() => {
-          setStatus({ type: 'success', msg: "You're on the list. Early access is coming soon." });
-          setFormData({ email: '', name: '', platform: 'iOS' });
-          setIsSubmitting(false);
-        }, 1000);
-        return;
-      }
-
-      const response = await fetch(scriptUrl, {
-        method: 'POST',
-        mode: 'no-cors', // Apps Script requires no-cors for simple POST
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      setStatus({ type: 'success', msg: "You're on the list. Early access is coming soon." });
-      setFormData({ email: '', name: '', platform: 'iOS' });
-    } catch (error) {
-      setStatus({ type: 'error', msg: 'Something went wrong. Please try again.' });
-    } finally {
-      setIsSubmitting(false);
-    }
+    setWlMsg({ text: '🙏 You\'re on the list! Watch your inbox — your invite is coming.', color: 'green' });
+    setEmail('');
   };
 
   const screenshots = [
@@ -153,7 +120,7 @@ export const Home = () => {
             animate={{ y: [0, -22, 0], rotate: [-2, -2, -2] }}
             transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
           >
-            <img src={homeImg} alt="Selah home screen" className="w-full h-full object-cover" />
+            <img src={homeImg} alt="Selah home screen" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
           </motion.div>
           
           <motion.div 
@@ -161,7 +128,7 @@ export const Home = () => {
             animate={{ y: [0, -16, 0], rotate: [3.5, 3.5, 3.5] }}
             transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
           >
-            <img src={readerImg} alt="Selah Bible reader" className="w-full h-full object-cover" />
+            <img src={readerImg} alt="Selah Bible reader" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
           </motion.div>
 
           <motion.div 
@@ -169,7 +136,7 @@ export const Home = () => {
             animate={{ y: [0, -10, 0], rotate: [1, 1, 1] }}
             transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
           >
-            <img src={notesImg} alt="Selah notes" className="w-full h-full object-cover" />
+            <img src={notesImg} alt="Selah notes" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
           </motion.div>
         </div>
       </section>
@@ -261,7 +228,7 @@ export const Home = () => {
             <Reveal key={idx} delay={idx * 0.1}>
               <div className="flex flex-col items-center gap-4">
                 <div className="iphone-card">
-                  <img src={screen.url} alt={screen.label} className="w-full h-full object-cover object-top" />
+                  <img src={screen.url} alt={screen.label} className="w-full h-full object-cover object-top" referrerPolicy="no-referrer" />
                 </div>
                 <span className="text-[0.7rem] font-medium tracking-widest uppercase text-text-dim">{screen.label}</span>
               </div>
@@ -302,7 +269,7 @@ export const Home = () => {
           <div className="flex justify-center">
             <Reveal delay={0.2}>
               <div className="screen-phone">
-                <img src={readerImg} alt="Bible reader" className="w-full h-full object-cover" />
+                <img src={readerImg} alt="Bible reader" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
               </div>
             </Reveal>
           </div>
@@ -315,7 +282,7 @@ export const Home = () => {
           <div className="order-2 lg:order-1 flex justify-center">
             <Reveal delay={0.2}>
               <div className="screen-phone">
-                <img src={socialsImg} alt="Community feed" className="w-full h-full object-cover" />
+                <img src={socialsImg} alt="Community feed" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
               </div>
             </Reveal>
           </div>
@@ -388,59 +355,31 @@ export const Home = () => {
       </div>
 
       {/* WAITLIST */}
-      <section id="waitlist" className="bg-black text-center px-6 lg:px-16 py-32 border-t border-border">
+      <section id="waitlist" className="bg-black text-center px-6 lg:px-16 py-32">
         <div className="max-w-[580px] mx-auto">
           <Reveal>
             <div className="inline-flex items-center gap-2 bg-gold/5 border border-border-gold rounded-full px-5 py-2 text-[0.7rem] font-medium text-gold tracking-widest uppercase mb-8">
               <Star className="w-3 h-3" />
               Early access — limited spots available
             </div>
-            <h2 className="font-serif text-5xl lg:text-6xl font-normal leading-tight mb-4">Join Early Access for Our Bible App</h2>
-            <p className="text-text-muted text-lg leading-relaxed mb-10">Be among the first to experience a powerful and modern way to engage with the Word.</p>
+            <h2 className="font-serif text-5xl lg:text-6xl font-normal leading-tight mb-4">Be the first to<br /><em className="italic text-gold">open Selah.</em></h2>
+            <p className="text-text-muted text-lg leading-relaxed mb-10">We're dropping early access like an airdrop — but for the Word. Leave your email and we'll reach out when your spot is ready. 🙏</p>
             
-            <form onSubmit={joinList} className="flex flex-col gap-4 max-w-[480px] mx-auto">
-              <div className="flex flex-col sm:flex-row gap-4">
-                <input 
-                  type="text" 
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="flex-1 bg-surface border border-border rounded-2xl px-6 py-3.5 text-text placeholder:text-text-dim outline-none focus:border-green/40 transition-colors shadow-sm" 
-                  placeholder="Your Name (Optional)"
-                />
-                <select 
-                  value={formData.platform}
-                  onChange={(e) => setFormData({ ...formData, platform: e.target.value })}
-                  className="bg-surface border border-border rounded-2xl px-6 py-3.5 text-text outline-none focus:border-green/40 transition-colors shadow-sm appearance-none cursor-pointer"
-                >
-                  <option value="iOS">iOS</option>
-                  <option value="Android">Android</option>
-                </select>
-              </div>
-              <div className="flex flex-col sm:flex-row gap-2">
-                <input 
-                  type="email" 
-                  required
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="flex-1 bg-surface border border-border rounded-2xl px-6 py-3.5 text-text placeholder:text-text-dim outline-none focus:border-green/40 transition-colors shadow-sm" 
-                  placeholder="your@email.com"
-                />
-                <button 
-                  type="submit" 
-                  disabled={isSubmitting}
-                  className="bg-gold text-black px-8 py-3.5 rounded-2xl font-medium whitespace-nowrap hover:bg-gold-light hover:scale-[1.02] transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
-                >
-                  {isSubmitting ? 'Joining...' : 'Join Waitlist'}
-                </button>
-              </div>
+            <form onSubmit={joinList} className="flex flex-col sm:flex-row gap-2 max-w-[480px] mx-auto">
+              <input 
+                type="email" 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="flex-1 bg-surface border border-border rounded-full px-6 py-3.5 text-text placeholder:text-text-dim outline-none focus:border-green/40 transition-colors" 
+                placeholder="your@email.com"
+              />
+              <button type="submit" className="bg-gold text-black px-7 py-3.5 rounded-full font-medium whitespace-nowrap hover:bg-gold-light hover:scale-105 transition-all active:scale-95">
+                Get early access
+              </button>
             </form>
             
-            <p className={`text-sm mt-6 transition-colors ${
-              status.type === 'error' ? 'text-red-400' : 
-              status.type === 'success' ? 'text-green' : 
-              'text-text-dim'
-            }`}>
-              {status.msg}
+            <p className={`text-xs mt-4 transition-colors ${wlMsg.color === 'red' ? 'text-red-400' : wlMsg.color === 'green' ? 'text-green' : 'text-text-dim'}`}>
+              {wlMsg.text}
             </p>
 
             <div className="flex items-center justify-center gap-3 mt-12">
