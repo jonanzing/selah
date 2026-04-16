@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');
+@import "tailwindcss";
+
+:root {
+  --black: #080808;
+  --surface: #101010;
+  --surface-2: #181818;
+  --surface-3: #222;
+  --green: #52B788;
+  --green-dark: #2D6A4F;
+  --green-light: #74C69D;
+  --gold: #C9A84C;
+  --gold-light: #E8C98A;
+  --text: #F5F0E8;
+  --text-muted: rgba(245, 240, 232, 0.55);
+  --text-dim: rgba(245, 240, 232, 0.28);
+  --border: rgba(245, 240, 232, 0.07);
+  --border-green: rgba(82, 183, 136, 0.18);
+  --border-gold: rgba(201, 168, 76, 0.22);
+}
+
+.light {
+  --black: #F5F0E8;
+  --surface: #FFFFFF;
+  --surface-2: #F0EBE0;
+  --surface-3: #E8E3D8;
+  --text: #080808;
+  --text-muted: rgba(8, 8, 8, 0.65);
+  --text-dim: rgba(8, 8, 8, 0.4);
+  --border: rgba(8, 8, 8, 0.1);
+  --border-green: rgba(45, 106, 79, 0.2);
+  --border-gold: rgba(201, 168, 76, 0.3);
+}
+
+@theme {
+  --color-black: var(--black);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-green: var(--green);
+  --color-green-dark: var(--green-dark);
+  --color-green-light: var(--green-light);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-text-dim: var(--text-dim);
+  --color-border: var(--border);
+  --color-border-green: var(--border-green);
+  --color-border-gold: var(--border-gold);
+
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Cormorant Garamond", ui-serif, Georgia, serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-black text-text font-sans overflow-x-hidden antialiased;
+    line-height: 1.6;
+  }
+}
+
+@layer components {
+  .cursor {
+    @apply fixed w-2 h-2 bg-gold rounded-full pointer-events-none z-[9999];
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s;
+  }
+
+  .cursor-ring {
+    @apply fixed w-8 h-8 border border-gold/45 rounded-full pointer-events-none z-[9998];
+    transform: translate(-50%, -50%);
+  }
+
+  .iphone-frame {
+    @apply relative rounded-[55px] overflow-hidden shadow-[0_60px_120px_rgba(0,0,0,0.85),0_0_0_1px_rgba(255,255,255,0.1)] ring-1 ring-inset ring-white/10;
+  }
+
+  .iphone-frame::before {
+    content: '';
+    @apply absolute inset-0 rounded-[55px] border-[2px] border-white/15 pointer-events-none z-10;
+  }
+
+  /* Dynamic Island for iPhone 17 Pro Max */
+  .iphone-frame::after {
+    content: '';
+    @apply absolute top-3 left-1/2 -translate-x-1/2 w-[85px] h-[26px] bg-black rounded-full z-20 shadow-[0_0_0_1px_rgba(255,255,255,0.05)];
+  }
+
+  .marquee-track {
+    @apply flex gap-20 w-max;
+    animation: marqueeScroll 32s linear infinite;
+  }
+
+  @keyframes marqueeScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .iphone-card {
+    @apply w-[200px] h-[430px] rounded-[42px] overflow-hidden relative shadow-[0_40px_80px_rgba(0,0,0,0.7),0_0_0_1px_rgba(255,255,255,0.08)] shrink-0;
+  }
+
+  .iphone-card::before {
+    @apply content-[''] absolute inset-0 rounded-[42px] border border-white/15 pointer-events-none z-10;
+  }
+
+  /* Scaled Dynamic Island for cards */
+  .iphone-card::after {
+    @apply content-[''] absolute top-2.5 left-1/2 -translate-x-1/2 w-[60px] h-[18px] bg-black rounded-full z-20;
+  }
+
+  .screen-phone {
+    @apply w-full max-w-[280px] mx-auto rounded-[50px] overflow-hidden shadow-[0_50px_100px_rgba(0,0,0,0.75),0_0_0_1px_rgba(255,255,255,0.08)] relative aspect-[9/19.5];
+  }
+
+  .screen-phone::before {
+    @apply content-[''] absolute inset-0 rounded-[50px] border-[1.5px] border-white/15 pointer-events-none z-10;
+  }
+
+  /* Dynamic Island for split section phones */
+  .screen-phone::after {
+    @apply content-[''] absolute top-3 left-1/2 -translate-x-1/2 w-[80px] h-[24px] bg-black rounded-full z-20;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
