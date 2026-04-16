@@ -13,12 +13,14 @@ import {
   Globe
 } from 'lucide-react';
 
-// Import local screenshots
-import homeImg from '../assets/screenshots/home.png';
-import readerImg from '../assets/screenshots/reader.png';
-import notesImg from '../assets/screenshots/notes.png';
-import socialsImg from '../assets/screenshots/socials.png';
-import profileImg from '../assets/screenshots/profile.png';
+// Import local screenshots (inlined as base64 for reliability)
+import { 
+  homeImg, 
+  readerImg, 
+  notesImg, 
+  socialsImg, 
+  profileImg 
+} from '../assets/screenshots';
 
 const Reveal: React.FC<{ children: React.ReactNode; delay?: number }> = ({ children, delay = 0 }) => {
   return (

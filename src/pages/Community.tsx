@@ -2,9 +2,8 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight, Star } from 'lucide-react';
 
-// Import local screenshots for the hero
-import homeImg from '../assets/screenshots/home.png';
-import socialsImg from '../assets/screenshots/socials.png';
+// Import local screenshots for the hero (inlined as base64 for reliability)
+import { homeImg, socialsImg } from '../assets/screenshots';
 
 const Reveal: React.FC<{ children: React.ReactNode; delay?: number }> = ({ children, delay = 0 }) => {
   return (
