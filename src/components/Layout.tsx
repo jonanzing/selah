@@ -127,19 +127,19 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
             >
               {isLight ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
             </button>
-            <Link 
-              to="/#waitlist" 
+            <a 
+              href="/#waitlist" 
               className="bg-green text-black px-6 py-2.5 rounded-full text-sm font-medium hover:bg-green-light hover:scale-105 transition-all active:scale-95"
             >
               Join waitlist
-            </Link>
+            </a>
           </li>
         </ul>
         <div className="md:hidden flex items-center gap-3">
           <button onClick={toggleTheme} className="p-2 text-text-muted">
             {isLight ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
           </button>
-          <Link to="/#waitlist" className="bg-green text-black px-4 py-2 rounded-full text-xs font-medium">Join</Link>
+          <a href="/#waitlist" className="bg-green text-black px-4 py-2 rounded-full text-xs font-medium">Join</a>
         </div>
       </nav>
 
