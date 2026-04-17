@@ -1,0 +1,36 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background: Deep "Luxury" Green Gradient -->
+  <rect width="1200" height="630" fill="#062A24"/>
+  <rect width="1200" height="630" fill="url(#paint0_radial_luxury)" fill-opacity="0.4"/>
+  
+  <!-- Content Area -->
+  <g transform="translate(100, 100)">
+    <!-- Logo (from favicon.svg) -->
+    <g transform="scale(5)">
+      <path d="M12.2031 1.09025C12.0738 1.03279 11.9262 1.03279 11.7969 1.09025L3.29693 4.86803C3.11637 4.94828 3 5.12734 3 5.32494V11C3 16.4571 6.74101 21.6189 11.8787 22.9689C11.9581 22.9898 12.0419 22.9898 12.1213 22.9689C17.259 21.6189 21 16.4571 21 11V5.32494C21 5.12734 20.8836 4.94828 20.7031 4.86803L12.2031 1.09025ZM16 9.5C16 9.77614 15.7761 10 15.5 10H13.5C13.2239 10 13 10.2239 13 10.5V17.5C13 17.7761 12.7761 18 12.5 18H11.5C11.2239 18 11 17.7761 11 17.5V10.5C11 10.2239 10.7761 10 10.5 10H8.5C8.22386 10 8 9.77614 8 9.5V8.5C8 8.22386 8.22386 8 8.5 8H10.5C10.7761 8 11 7.77614 11 7.5V5.5C11 5.22386 11.2239 5 11.5 5H12.5C12.7761 5 13 5.22386 13 5.5V7.5C13 7.77614 13.2239 8 13.5 8H15.5C15.7761 8 16 8.22386 16 8.5V9.5Z" fill="#22C55E"/>
+    </g>
+
+    <!-- SELAH TEXT -->
+    <text x="140" y="85" fill="#f5f2ed" font-family="'Inter', sans-serif" font-size="90" font-weight="700" letter-spacing="-0.03em">Selah.</text>
+    
+    <!-- TAGLINE -->
+    <text x="0" y="240" fill="#D4AF37" font-family="'Inter', serif" font-size="54" font-style="italic">The Word, alive in your hands.</text>
+
+    <!-- DESCRIPTION -->
+    <foreignObject x="0" y="300" width="800" height="200">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: 'Inter', sans-serif; font-size: 32px; line-height: 1.4; color: rgba(245,242,237,0.7); font-weight: 300;">
+        Transform your study into a shared journey. Track streaks, join live prayer rooms, and go deeper together.
+      </div>
+    </foreignObject>
+  </g>
+
+  <!-- DECORATIVE LINES -->
+  <line x1="100" y1="550" x2="1100" y2="550" stroke="#f5f2ed" stroke-opacity="0.1" />
+  
+  <defs>
+    <radialGradient id="paint0_radial_luxury" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(600 315) rotate(90) scale(400 800)">
+      <stop stop-color="#D4AF37"/>
+      <stop offset="1" stop-color="#062A24" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>
