@@ -1,4 +1,31 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <circle cx="50" cy="50" r="48" fill="#10B981"/>
-  <text x="50" y="65" font-family="serif" font-size="60" text-anchor="middle" fill="black">S</text>
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_n_5214_12)">
+<path d="M12.2031 1.09025C12.0738 1.03279 11.9262 1.03279 11.7969 1.09025L3.29693 4.86803C3.11637 4.94828 3 5.12734 3 5.32494V11C3 16.4571 6.74101 21.6189 11.8787 22.9689C11.9581 22.9898 12.0419 22.9898 12.1213 22.9689C17.259 21.6189 21 16.4571 21 11V5.32494C21 5.12734 20.8836 4.94828 20.7031 4.86803L12.2031 1.09025ZM16 9.5C16 9.77614 15.7761 10 15.5 10H13.5C13.2239 10 13 10.2239 13 10.5V17.5C13 17.7761 12.7761 18 12.5 18H11.5C11.2239 18 11 17.7761 11 17.5V10.5C11 10.2239 10.7761 10 10.5 10H8.5C8.22386 10 8 9.77614 8 9.5V8.5C8 8.22386 8.22386 8 8.5 8H10.5C10.7761 8 11 7.77614 11 7.5V5.5C11 5.22386 11.2239 5 11.5 5H12.5C12.7761 5 13 5.22386 13 5.5V7.5C13 7.77614 13.2239 8 13.5 8H15.5C15.7761 8 16 8.22386 16 8.5V9.5Z" fill="url(#paint0_linear_5214_12)"/>
+</g>
+<defs>
+<filter id="filter0_n_5214_12" x="0" y="0" width="24" height="24" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feTurbulence type="fractalNoise" baseFrequency="3.3333332538604736 3.3333332538604736" stitchTiles="stitch" numOctaves="3" result="noise" seed="8574" />
+<feComponentTransfer in="noise" result="coloredNoise1">
+<feFuncR type="linear" slope="2" intercept="-0.5" />
+<feFuncG type="linear" slope="2" intercept="-0.5" />
+<feFuncB type="linear" slope="2" intercept="-0.5" />
+<feFuncA type="discrete" tableValues="0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 "/>
+</feComponentTransfer>
+<feComposite operator="in" in2="shape" in="coloredNoise1" result="noise1Clipped" />
+<feComponentTransfer in="noise1Clipped" result="color1">
+<feFuncA type="table" tableValues="0 0.15" />
+</feComponentTransfer>
+<feMerge result="effect1_noise_5214_12">
+<feMergeNode in="shape" />
+<feMergeNode in="color1" />
+</feMerge>
+</filter>
+<linearGradient id="paint0_linear_5214_12" x1="12" y1="1" x2="12" y2="23" gradientUnits="userSpaceOnUse">
+<stop offset="0.0144231" stop-color="#02C1A8"/>
+<stop offset="0.456731" stop-color="#0AB916"/>
+<stop offset="1" stop-color="#002445"/>
+</linearGradient>
+</defs>
 </svg>

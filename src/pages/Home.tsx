@@ -67,7 +67,7 @@ export const Home = () => {
 
           <Reveal delay={0.2}>
             <p className="text-lg text-text-muted leading-relaxed max-w-[640px] mx-auto lg:mx-0 mb-10">
-              Selah is a Bible app built for daily encounter — verse of the day, AI-powered notes, live reading rooms, and a community that prays and grows together.
+              Selah is a bible app built for daily encounter to Transform your daily study into a shared journey. Track your streaks, join live prayer rooms, and unlock deeper scriptural insights with a beautifully designed, modern study workspace.
             </p>
           </Reveal>
 
@@ -371,7 +371,7 @@ export const Home = () => {
               Early access — limited spots available
             </div>
             <h2 className="font-serif text-5xl lg:text-6xl font-normal leading-tight mb-4">Be the first to<br /><em className="italic text-gold">open Selah.</em></h2>
-            <p className="text-text-muted text-lg leading-relaxed mb-10">We're dropping early access like an airdrop — but for the Word. Leave your email and we'll reach out when your spot is ready. 🙏</p>
+            <p className="text-text-muted text-lg leading-relaxed mb-10">Selah is a bible app built for daily encounter to Transform your daily study into a shared journey. Track your streaks, join live prayer rooms, and unlock deeper scriptural insights with a beautifully designed, modern study workspace.</p>
             
             <form 
               action="https://formsubmit.co/nanzingj@gmail.com" 

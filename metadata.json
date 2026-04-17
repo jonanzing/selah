@@ -1,6 +1,6 @@
 {
   "name": "Selah",
-  "description": "Selah is a Bible app designed for daily encounters, featuring a verse of the day, AI-powered notes, live reading rooms, and a community that prays and grows together.",
+  "description": "Selah is a Bible app built for daily encounter. Transform your study into a shared journey, track streaks, and join live prayer rooms to go deeper.",
   "requestFramePermissions": [],
   "majorCapabilities": []
 }
