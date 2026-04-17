@@ -145,13 +145,15 @@ export const Features = () => {
       <div className="bg-surface border-y border-border sticky top-20 z-[150]">
         <div className="flex overflow-x-auto gap-0 px-6 lg:px-16 no-scrollbar">
           {featureBlocks.map((f) => (
-            <button 
+            <motion.button 
               key={f.id}
+              whileHover={{ scale: 0.95 }}
+              whileTap={{ scale: 0.9 }}
               className="px-7 py-4.5 text-[0.85rem] font-medium text-text-muted border-b-2 border-transparent whitespace-nowrap transition-all hover:text-text active:text-green focus:text-green focus:border-green"
               onClick={() => scrollTo(f.id)}
             >
               {f.label}
-            </button>
+            </motion.button>
           ))}
         </div>
       </div>
@@ -195,9 +197,14 @@ export const Features = () => {
             <h2 className="font-serif text-4xl lg:text-5xl font-normal leading-tight mb-4">Six features.<br /><em className="italic text-gold">One daily habit.</em></h2>
             <p className="text-base text-text-muted leading-relaxed mb-8 max-w-[420px] mx-auto">Selah brings everything you need into one place — and makes opening your Bible the best part of your day.</p>
             <div className="flex justify-center">
-              <a href="/#waitlist" className="inline-flex items-center gap-2 bg-green text-black px-8 py-4 rounded-full font-medium text-base hover:bg-green-light hover:-translate-y-0.5 transition-all active:translate-y-0">
+              <motion.a 
+                href="/#waitlist" 
+                whileHover={{ scale: 0.98 }}
+                whileTap={{ scale: 0.96 }}
+                className="inline-flex items-center gap-2 bg-green text-black px-8 py-4 rounded-full font-medium text-base hover:bg-green-light transition-all"
+              >
                 Get early access <ArrowRight className="w-4 h-4" />
-              </a>
+              </motion.a>
             </div>
           </Reveal>
         </div>

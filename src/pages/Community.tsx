@@ -84,12 +84,15 @@ export const Community = () => {
             { icon: "⚡", name: "Truth", desc: "This is real. This is accurate. This is the Word.", count: "18K" }
           ].map((react, i) => (
             <Reveal key={i} delay={i * 0.1}>
-              <div className="bg-surface-2 border border-border rounded-[20px] p-8 hover:border-green/20 hover:-translate-y-1 transition-all group">
+              <motion.div 
+                whileHover={{ scale: 0.97 }}
+                className="bg-surface-2 border border-border rounded-[20px] p-8 hover:border-green/20 transition-all group cursor-default"
+              >
                 <div className="text-4xl mb-4">{react.icon}</div>
                 <div className="text-lg font-medium mb-2">{react.name}</div>
                 <p className="text-xs text-text-muted leading-relaxed mb-4">{react.desc}</p>
                 <div className="font-serif text-3xl text-green">{react.count}</div>
-              </div>
+              </motion.div>
             </Reveal>
           ))}
         </div>
@@ -118,7 +121,11 @@ export const Community = () => {
                     rx: '🏛 Amen 21'
                   }
                 ].map((post, i) => (
-                  <div key={i} className="bg-surface-2 border border-border rounded-[18px] p-6">
+                  <motion.div 
+                    key={i} 
+                    whileHover={{ scale: 0.985 }}
+                    className="bg-surface-2 border border-border rounded-[18px] p-6 cursor-default"
+                  >
                     <div className="flex items-center gap-3 mb-3">
                       <div className="w-[38px] h-[38px] rounded-full flex items-center justify-center text-xs font-medium" style={{ background: post.bg, color: post.color }}>{post.init}</div>
                       <div>
@@ -135,7 +142,7 @@ export const Community = () => {
                       <div className="inline-flex items-center gap-1.5 bg-green/10 border border-border-green rounded-full px-3 py-1 text-[0.75rem] text-green">{post.rx}</div>
                       <div className="inline-flex items-center gap-1.5 bg-white/5 border border-border rounded-full px-3 py-1 text-[0.75rem] text-text-muted">🙏 Pray</div>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
@@ -148,7 +155,10 @@ export const Community = () => {
               <p className="text-base text-text-muted leading-relaxed mb-8">Join a live room and open scripture alongside dozens of other believers — in real time. See who else is on the same verse. Read at the same pace. Pray at the end.</p>
               
               <div className="space-y-4">
-                <div className="bg-surface border border-border rounded-[18px] p-6 hover:border-green/20 transition-colors">
+                <motion.div 
+                  whileHover={{ scale: 0.98 }}
+                  className="bg-surface border border-border rounded-[18px] p-6 hover:border-green/20 transition-colors cursor-pointer"
+                >
                   <div className="inline-flex items-center gap-2 bg-red-500/10 border border-red-500/20 rounded-full px-3 py-1 text-[0.68rem] text-red-400 font-medium mb-4">
                     <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
                     LIVE · 14 MIN
@@ -163,9 +173,12 @@ export const Community = () => {
                   <div className="text-base font-medium mb-1">Evening Psalms</div>
                   <div className="text-[0.78rem] text-text-muted mb-3">Tonight · Psalm 4 & 91</div>
                   <div className="font-serif text-2xl text-green">128 <span className="text-[0.7rem] text-text-dim not-italic">reading along</span></div>
-                </div>
+                </motion.div>
 
-                <div className="bg-surface border border-border rounded-[18px] p-6 hover:border-green/20 transition-colors">
+                <motion.div 
+                  whileHover={{ scale: 0.98 }}
+                  className="bg-surface border border-border rounded-[18px] p-6 hover:border-green/20 transition-colors cursor-pointer"
+                >
                   <div className="inline-flex items-center gap-2 bg-gold/10 border border-border-gold rounded-full px-3 py-1 text-[0.68rem] text-gold font-medium mb-4">
                     Starting in 20 min
                   </div>
@@ -179,7 +192,7 @@ export const Community = () => {
                   <div className="text-base font-medium mb-1">Romans Deep Dive</div>
                   <div className="text-[0.78rem] text-text-muted mb-3">Romans 8 · Full chapter</div>
                   <div className="font-serif text-2xl text-green">45 <span className="text-[0.7rem] text-text-dim not-italic">signed up</span></div>
-                </div>
+                </motion.div>
               </div>
             </div>
           </Reveal>
@@ -201,7 +214,10 @@ export const Community = () => {
             { ref: "Romans 8:28", text: "And we know that all things work together for good to them that love God...", fill: "55%", count: "1,740 reflections", fire: false }
           ].map((tv, i) => (
             <Reveal key={i} delay={i * 0.1}>
-              <div className="bg-surface-2 border border-border rounded-2xl p-6">
+              <motion.div 
+                whileHover={{ scale: 0.985 }}
+                className="bg-surface-2 border border-border rounded-2xl p-6 cursor-default"
+              >
                 <div className="text-base font-medium mb-1">{tv.ref}</div>
                 <p className="text-sm text-text-muted leading-relaxed mb-4 h-10 overflow-hidden line-clamp-2">{tv.text}</p>
                 <div className="h-[3px] bg-surface-3 rounded-full mb-3 overflow-hidden">
@@ -211,7 +227,7 @@ export const Community = () => {
                   <span className="text-[0.7rem] text-text-dim">{tv.count} this week</span>
                   {tv.fire && <span className="text-base">🔥</span>}
                 </div>
-              </div>
+              </motion.div>
             </Reveal>
           ))}
         </div>
@@ -225,9 +241,14 @@ export const Community = () => {
             <h2 className="font-serif text-5xl lg:text-6xl font-normal leading-tight mb-6">Your people are<br /><em className="italic text-gold">already inside.</em></h2>
             <p className="text-lg text-text-muted leading-relaxed mb-10">Get early access and be part of the founding community of Selah — the believers who show up before the doors open.</p>
             <div className="flex justify-center">
-              <a href="/#waitlist" className="inline-flex items-center gap-2 bg-green text-black px-8 py-4 rounded-full font-medium text-base hover:bg-green-light hover:-translate-y-0.5 transition-all active:translate-y-0">
+              <motion.a 
+                href="/#waitlist" 
+                whileHover={{ scale: 0.98 }}
+                whileTap={{ scale: 0.96 }}
+                className="inline-flex items-center gap-2 bg-green text-black px-8 py-4 rounded-full font-medium text-base hover:bg-green-light transition-all"
+              >
                 Get early access <ArrowRight className="w-4 h-4" />
-              </a>
+              </motion.a>
             </div>
           </Reveal>
         </div>

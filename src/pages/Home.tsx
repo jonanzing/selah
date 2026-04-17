@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'motion/react';
 import { 
   BookOpen, 
@@ -36,20 +36,6 @@ const Reveal: React.FC<{ children: React.ReactNode; delay?: number }> = ({ child
 };
 
 export const Home = () => {
-  const [email, setEmail] = useState('');
-  const [wlMsg, setWlMsg] = useState({ text: 'No spam, ever. Just your personal invite when it\'s time.', color: 'dim' });
-
-  const joinList = (e?: React.FormEvent) => {
-    if (e) e.preventDefault();
-    const v = email.trim();
-    if (!v || !v.includes('@') || !v.includes('.')) {
-      setWlMsg({ text: 'Please enter a valid email address.', color: 'red' });
-      return;
-    }
-    setWlMsg({ text: '🙏 You\'re on the list! Watch your inbox — your invite is coming.', color: 'green' });
-    setEmail('');
-  };
-
   const screenshots = [
     { url: homeImg, label: 'Home' },
     { url: readerImg, label: 'Bible reader' },
@@ -65,7 +51,7 @@ export const Home = () => {
         <div className="absolute top-[5%] right-[10%] w-[500px] h-[500px] rounded-full bg-green-dark/10 blur-[100px] pointer-events-none" />
         <div className="absolute bottom-[5%] left-[5%] w-[350px] h-[350px] rounded-full bg-gold/5 blur-[100px] pointer-events-none" />
         
-        <div className="max-w-[560px] shrink-0 text-center lg:text-left z-10">
+        <div className="max-w-[700px] shrink-0 text-center lg:text-left z-10">
           <Reveal>
             <div className="inline-flex items-center gap-2 bg-green/5 border border-border-green rounded-full px-4 py-1.5 text-[0.7rem] font-medium text-green tracking-widest uppercase mb-8">
               <div className="w-1.5 h-1.5 rounded-full bg-green animate-pulse" />
@@ -74,26 +60,36 @@ export const Home = () => {
           </Reveal>
           
           <Reveal delay={0.1}>
-            <h1 className="font-serif text-6xl lg:text-[5.5rem] font-normal leading-[1.03] tracking-tight mb-6 text-balance">
-              The Word,<br /><em className="italic text-gold">alive in your</em><br />hands.
+            <h1 className="font-serif text-6xl lg:text-[5.5rem] font-normal leading-[1.03] tracking-tight mb-6 text-balance max-w-[820px]">
+              The Word, <em className="italic text-gold">alive in your</em> hands.
             </h1>
           </Reveal>
 
           <Reveal delay={0.2}>
-            <p className="text-lg text-text-muted leading-relaxed max-w-[430px] mx-auto lg:mx-0 mb-10">
+            <p className="text-lg text-text-muted leading-relaxed max-w-[640px] mx-auto lg:mx-0 mb-10">
               Selah is a Bible app built for daily encounter — verse of the day, AI-powered notes, live reading rooms, and a community that prays and grows together.
             </p>
           </Reveal>
 
           <Reveal delay={0.3}>
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4">
-              <a href="#waitlist" className="inline-flex items-center gap-2 bg-green text-black px-8 py-3.5 rounded-full font-medium text-base hover:bg-green-light hover:-translate-y-0.5 transition-all active:translate-y-0">
+              <motion.a 
+                href="#waitlist" 
+                whileHover={{ scale: 0.98 }}
+                whileTap={{ scale: 0.96 }}
+                className="inline-flex items-center gap-2 bg-green text-black px-8 py-3.5 rounded-full font-medium text-base hover:bg-green-light transition-all"
+              >
                 <ArrowRight className="w-4 h-4 rotate-[-45deg]" />
                 Get early access
-              </a>
-              <a href="#features" className="inline-flex items-center gap-2 text-text-muted px-7 py-3.5 border border-border rounded-full text-base hover:text-text hover:border-text/20 transition-all">
+              </motion.a>
+              <motion.a 
+                href="#features" 
+                whileHover={{ scale: 0.98 }}
+                whileTap={{ scale: 0.96 }}
+                className="inline-flex items-center gap-2 text-text-muted px-7 py-3.5 border border-border rounded-full text-base hover:text-text hover:border-text/20 transition-all"
+              >
                 See features <ChevronRight className="w-4 h-4" />
-              </a>
+              </motion.a>
             </div>
           </Reveal>
 
@@ -198,13 +194,17 @@ export const Home = () => {
             { icon: <Globe />, title: "The Commons", desc: "A faith-first social feed. Post verses, prayers, notes. React with Amen, Pray, Thanks, or Truth." },
             { icon: <Flame />, title: "Streaks & coins", desc: "Track your daily reading streak on a fire calendar. Earn coins. Stay consistent. Stay burning." }
           ].map((feat, idx) => (
-            <div key={idx} className="bg-surface p-9 hover:bg-surface-2 transition-colors group">
-              <div className="w-12 h-12 rounded-xl bg-green/10 border border-border-green flex items-center justify-center text-green mb-6 group-hover:scale-110 transition-transform">
-                {feat.icon}
-              </div>
-              <h3 className="text-lg font-medium mb-2">{feat.title}</h3>
-              <p className="text-sm text-text-muted leading-relaxed">{feat.desc}</p>
+          <motion.div 
+            key={idx} 
+            whileHover={{ scale: 0.98 }}
+            className="bg-surface p-9 hover:bg-surface-2 transition-colors group cursor-default"
+          >
+            <div className="w-12 h-12 rounded-xl bg-green/10 border border-border-green flex items-center justify-center text-green mb-6 group-hover:scale-110 transition-transform">
+              {feat.icon}
             </div>
+            <h3 className="text-lg font-medium mb-2">{feat.title}</h3>
+            <p className="text-sm text-text-muted leading-relaxed">{feat.desc}</p>
+          </motion.div>
           ))}
         </div>
       </section>
@@ -228,12 +228,15 @@ export const Home = () => {
         <div className="flex flex-wrap justify-center gap-8 lg:gap-12 mt-14">
           {screenshots.map((screen, idx) => (
             <Reveal key={idx} delay={idx * 0.1}>
-              <div className="flex flex-col items-center gap-4">
+              <motion.div 
+                whileHover={{ scale: 0.96 }}
+                className="flex flex-col items-center gap-4 cursor-pointer"
+              >
                 <div className="iphone-card">
                   <img src={screen.url} alt={screen.label} className="w-full h-full object-cover object-top" />
                 </div>
                 <span className="text-[0.7rem] font-medium tracking-widest uppercase text-text-dim">{screen.label}</span>
-              </div>
+              </motion.div>
             </Reveal>
           ))}
         </div>
@@ -296,13 +299,16 @@ export const Home = () => {
               
               <div className="text-sm text-text-muted mb-4">React with more than a heart:</div>
               <div className="flex flex-wrap gap-2 mb-8">
-                <div className="px-4 py-1.5 bg-green/10 border border-border-green rounded-full text-sm text-green">🏛 Amen</div>
-                <div className="px-4 py-1.5 bg-white/5 border border-border rounded-full text-sm text-text-muted">🙏 Pray</div>
-                <div className="px-4 py-1.5 bg-white/5 border border-border rounded-full text-sm text-text-muted">🤲 Thanks</div>
-                <div className="px-4 py-1.5 bg-white/5 border border-border rounded-full text-sm text-text-muted">⚡ Truth</div>
+                <motion.div whileHover={{ scale: 0.95 }} className="px-4 py-1.5 bg-green/10 border border-border-green rounded-full text-sm text-green cursor-default">🏛 Amen</motion.div>
+                <motion.div whileHover={{ scale: 0.95 }} className="px-4 py-1.5 bg-white/5 border border-border rounded-full text-sm text-text-muted cursor-default">🙏 Pray</motion.div>
+                <motion.div whileHover={{ scale: 0.95 }} className="px-4 py-1.5 bg-white/5 border border-border rounded-full text-sm text-text-muted cursor-default">🤲 Thanks</motion.div>
+                <motion.div whileHover={{ scale: 0.95 }} className="px-4 py-1.5 bg-white/5 border border-border rounded-full text-sm text-text-muted cursor-default">⚡ Truth</motion.div>
               </div>
 
-              <div className="bg-surface-2 border border-border rounded-2xl p-6">
+              <motion.div 
+                whileHover={{ scale: 0.985 }}
+                className="bg-surface-2 border border-border rounded-2xl p-6 cursor-default"
+              >
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-9 h-9 rounded-full bg-green-dark flex items-center justify-center text-xs font-medium text-green-light">M</div>
                   <div>
@@ -319,7 +325,7 @@ export const Home = () => {
                   <div className="px-3 py-1 bg-green/10 border border-border-green rounded-full text-[0.7rem] text-green">🏛 48</div>
                   <div className="px-3 py-1 bg-white/5 border border-border rounded-full text-[0.7rem] text-text-muted">🙏 12</div>
                 </div>
-              </div>
+              </motion.div>
             </Reveal>
           </div>
         </div>
@@ -367,21 +373,34 @@ export const Home = () => {
             <h2 className="font-serif text-5xl lg:text-6xl font-normal leading-tight mb-4">Be the first to<br /><em className="italic text-gold">open Selah.</em></h2>
             <p className="text-text-muted text-lg leading-relaxed mb-10">We're dropping early access like an airdrop — but for the Word. Leave your email and we'll reach out when your spot is ready. 🙏</p>
             
-            <form onSubmit={joinList} className="flex flex-col sm:flex-row gap-2 max-w-[480px] mx-auto">
+            <form 
+              action="https://formsubmit.co/nanzingj@gmail.com" 
+              method="POST" 
+              className="flex flex-col sm:flex-row gap-2 max-w-[480px] mx-auto"
+            >
+              <input type="hidden" name="_autoresponse" value="Hi there! Thank you so much for requesting early access to Selah. We are thrilled to have you on board! We are currently putting the finishing touches on our workspace, designed specifically to help leaders and speakers study and organize texts without the usual friction. Since you are on the waitlist, you will be among the very first to know when we open our doors. If you have any thoughts or questions in the meantime, feel free to reply directly to this email. Warmly, The Selah Team" />
+              <input type="hidden" name="_subject" value="New Waitlist Signup for Selah!" />
+              <input type="hidden" name="_next" value="https://www.myselahh.com" />
+              
               <input 
                 type="email" 
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                name="email"
+                required
                 className="flex-1 bg-surface border border-border rounded-full px-6 py-3.5 text-text placeholder:text-text-dim outline-none focus:border-green/40 transition-colors" 
                 placeholder="your@email.com"
               />
-              <button type="submit" className="bg-gold text-black px-7 py-3.5 rounded-full font-medium whitespace-nowrap hover:bg-gold-light hover:scale-105 transition-all active:scale-95">
+              <motion.button 
+                type="submit" 
+                whileHover={{ scale: 0.98 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-gold text-black px-7 py-3.5 rounded-full font-medium whitespace-nowrap hover:bg-gold-light transition-all"
+              >
                 Get early access
-              </button>
+              </motion.button>
             </form>
             
-            <p className={`text-xs mt-4 transition-colors ${wlMsg.color === 'red' ? 'text-red-400' : wlMsg.color === 'green' ? 'text-green' : 'text-text-dim'}`}>
-              {wlMsg.text}
+            <p className="text-xs mt-4 transition-colors text-text-dim">
+              No spam, ever. Just your personal invite when it's time.
             </p>
 
             <div className="flex items-center justify-center gap-3 mt-12">
