@@ -4,6 +4,7 @@
 - **Title**: Always set `<title>Selah</title>` in `index.html`.
 - **Meta Tags**: Always include the following block in the `<head>` section of `index.html`:
 ```html
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <title>Selah</title>
 <meta name="title" content="Selah">
 <meta name="description" content="Selah is a Bible app designed for daily encounters, featuring a verse of the day, AI-powered notes, live reading rooms, and a community that prays and grows together.">
