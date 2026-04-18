@@ -6,19 +6,24 @@ import { Features } from './pages/Features';
 import { Community } from './pages/Community';
 import { About } from './pages/About';
 import { Blog } from './pages/Blog';
+import { AdminPage } from './pages/Admin';
+import { AdminLogin } from './components/admin/AdminLogin';
 
 export default function App() {
   return (
     <Router>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/features" element={<Features />} />
-          <Route path="/community" element={<Community />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/blog" element={<Blog />} />
-        </Routes>
-      </Layout>
+      <Routes>
+        {/* Public Site */}
+        <Route path="/" element={<Layout><Home /></Layout>} />
+        <Route path="/features" element={<Layout><Features /></Layout>} />
+        <Route path="/community" element={<Layout><Community /></Layout>} />
+        <Route path="/about" element={<Layout><About /></Layout>} />
+        <Route path="/blog" element={<Layout><Blog /></Layout>} />
+
+        {/* Admin CMS */}
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin/*" element={<AdminPage />} />
+      </Routes>
     </Router>
   );
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
+import { useCMS } from '../hooks/useCMS';
 import { 
   BookOpen, 
   Users, 
@@ -36,12 +37,14 @@ const Reveal: React.FC<{ children: React.ReactNode; delay?: number }> = ({ child
 };
 
 export const Home = () => {
+  const { get, metrics } = useCMS();
+  
   const screenshots = [
-    { url: homeImg, label: 'Home' },
-    { url: readerImg, label: 'Bible reader' },
-    { url: notesImg, label: 'My notes' },
-    { url: socialsImg, label: 'Socials' },
-    { url: profileImg, label: 'Profile' }
+    { url: get('asset_home', homeImg), label: 'Home' },
+    { url: get('asset_reader', readerImg), label: 'Bible reader' },
+    { url: get('asset_notes', notesImg), label: 'My notes' },
+    { url: get('asset_socials', socialsImg), label: 'Socials' },
+    { url: get('asset_profile', profileImg), label: 'Profile' }
   ];
 
   return (
@@ -61,13 +64,13 @@ export const Home = () => {
           
           <Reveal delay={0.1}>
             <h1 className="font-serif text-6xl lg:text-[5.5rem] font-normal leading-[1.03] tracking-tight mb-6 text-balance max-w-[820px]">
-              The Word, <em className="italic text-gold">alive in your</em> hands.
+              {get('hero_title_part_1', 'The Word,')} <em className="italic text-gold">{get('hero_title_accent', 'alive in your')}</em> {get('hero_title_part_2', 'hands.')}
             </h1>
           </Reveal>
 
           <Reveal delay={0.2}>
             <p className="text-lg text-text-muted leading-relaxed max-w-[640px] mx-auto lg:mx-0 mb-10">
-              Selah is a bible app built for daily encounter to Transform your daily study into a shared journey. Track your streaks, join live prayer rooms, and unlock deeper scriptural insights with a beautifully designed, modern study workspace.
+              {get('hero_description', 'Selah is a bible app built for daily encounter to Transform your daily study into a shared journey. Track your streaks, join live prayer rooms, and unlock deeper scriptural insights with a beautifully designed, modern study workspace.')}
             </p>
           </Reveal>
 
@@ -95,18 +98,29 @@ export const Home = () => {
 
           <Reveal delay={0.4}>
             <div className="flex justify-center lg:justify-start gap-10 mt-12 pt-8 border-t border-border">
-              <div>
-                <div className="font-serif text-4xl font-normal leading-none">5K<em className="italic text-green not-italic">+</em></div>
-                <div className="text-[0.7rem] text-text-muted mt-1.5 tracking-wider uppercase">On the waitlist</div>
-              </div>
-              <div>
-                <div className="font-serif text-4xl font-normal leading-none">31<em className="italic text-green not-italic">k</em></div>
-                <div className="text-[0.7rem] text-text-muted mt-1.5 tracking-wider uppercase">Verses in the Bible</div>
-              </div>
-              <div>
-                <div className="font-serif text-4xl font-normal leading-none">1<em className="italic text-green not-italic">app</em></div>
-                <div className="text-[0.7rem] text-text-muted mt-1.5 tracking-wider uppercase">To do it all</div>
-              </div>
+              {metrics.length > 0 ? (
+                metrics.slice(0, 3).map((m, i) => (
+                  <div key={i}>
+                    <div className="font-serif text-4xl font-normal leading-none">{m.value}<em className="italic text-green not-italic">{m.suffix}</em></div>
+                    <div className="text-[0.7rem] text-text-muted mt-1.5 tracking-wider uppercase">{m.label}</div>
+                  </div>
+                ))
+              ) : (
+                <>
+                  <div>
+                    <div className="font-serif text-4xl font-normal leading-none">5K<em className="italic text-green not-italic">+</em></div>
+                    <div className="text-[0.7rem] text-text-muted mt-1.5 tracking-wider uppercase">On the waitlist</div>
+                  </div>
+                  <div>
+                    <div className="font-serif text-4xl font-normal leading-none">31<em className="italic text-green not-italic">k</em></div>
+                    <div className="text-[0.7rem] text-text-muted mt-1.5 tracking-wider uppercase">Verses in the Bible</div>
+                  </div>
+                  <div>
+                    <div className="font-serif text-4xl font-normal leading-none">1<em className="italic text-green not-italic">app</em></div>
+                    <div className="text-[0.7rem] text-text-muted mt-1.5 tracking-wider uppercase">To do it all</div>
+                  </div>
+                </>
+              )}
             </div>
           </Reveal>
         </div>
@@ -118,7 +132,7 @@ export const Home = () => {
             animate={{ y: [0, -22, 0], rotate: [-2, -2, -2] }}
             transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
           >
-            <img src={homeImg} alt="Selah home screen" className="w-full h-full object-cover" />
+            <img src={get('asset_home', homeImg)} alt="Selah home screen" className="w-full h-full object-cover" />
           </motion.div>
           
           <motion.div 
@@ -126,7 +140,7 @@ export const Home = () => {
             animate={{ y: [0, -16, 0], rotate: [3.5, 3.5, 3.5] }}
             transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
           >
-            <img src={readerImg} alt="Selah Bible reader" className="w-full h-full object-cover" />
+            <img src={get('asset_reader', readerImg)} alt="Selah Bible reader" className="w-full h-full object-cover" />
           </motion.div>
 
           <motion.div 
@@ -134,7 +148,7 @@ export const Home = () => {
             animate={{ y: [0, -10, 0], rotate: [1, 1, 1] }}
             transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
           >
-            <img src={notesImg} alt="Selah notes" className="w-full h-full object-cover" />
+            <img src={get('asset_notes', notesImg)} alt="Selah notes" className="w-full h-full object-cover" />
           </motion.div>
         </div>
       </section>
