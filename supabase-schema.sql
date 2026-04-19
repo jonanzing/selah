@@ -72,12 +72,38 @@ create policy "Public Read" on public.blog_posts for select using (true);
 create policy "Admin Write" on public.blog_posts for all using (auth.role() = 'authenticated');
 
 create policy "Public Read" on public.bible_content for select using (true);
+-- 6. Hero Mockups (iPhone Screens)
+create table if not exists public.mockups (
+  id uuid primary key default gen_random_uuid(),
+  label text not null,
+  url text not null,
+  display_order int default 0,
+  is_active boolean default true
+);
+
+-- Enable RLS
+alter table public.mockups enable row level security;
+alter table public.bible_content enable row level security;
+
+-- Policies
+create policy "Public Read" on public.mockups for select using (true);
+create policy "Admin Write" on public.mockups for all using (auth.role() = 'authenticated');
+
+create policy "Admin Write" on public.bible_content for all using (auth.role() = 'authenticated');
+
 -- Seed Data for Global Settings
 insert into public.site_settings (key, value) values 
 ('hero_title_part_1', 'The Word,'),
 ('hero_title_accent', 'alive in your'),
 ('hero_title_part_2', 'hands.'),
 ('hero_description', 'Selah is a bible app built for daily encounter to Transform your daily study into a shared journey. Track your streaks, join live prayer rooms, and unlock deeper scriptural insights with a beautifully designed, modern study workspace.');
+
+-- Seed Data for Mockups
+insert into public.mockups (label, url, display_order) values 
+('Verse of the day', 'https://picsum.photos/seed/selah-1/800/1600', 1),
+('Character study', 'https://picsum.photos/seed/selah-2/800/1600', 2),
+('Reading habit', 'https://picsum.photos/seed/selah-3/800/1600', 3),
+('Community feed', 'https://picsum.photos/seed/selah-4/800/1600', 4);
 
 -- Seed Data for Metrics
 insert into public.metrics (label, value, suffix, display_order) values 

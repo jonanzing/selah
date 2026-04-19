@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight, Clock, Calendar } from 'lucide-react';
+import { useCMS } from '../hooks/useCMS';
 
 const Reveal: React.FC<{ children: React.ReactNode; delay?: number }> = ({ children, delay = 0 }) => {
   return (
@@ -16,6 +17,7 @@ const Reveal: React.FC<{ children: React.ReactNode; delay?: number }> = ({ child
 };
 
 export const Blog = () => {
+  const { get } = useCMS();
   const [nlEmail, setNlEmail] = useState('');
   const [nlMsg, setNlMsg] = useState({ text: 'Free forever. Unsubscribe any time.', color: 'dim' });
 
@@ -43,8 +45,8 @@ export const Blog = () => {
       date: "April 13",
       verse: "Fear thou not; for I am with thee.",
       ref: "Isaiah 41:10",
-      grad: "from-[#0d2a1c] to-[#0a1510]",
-      glow: "rgba(82,183,136,0.06)"
+      grad: "bg-[#52B788]/10",
+      glow: "rgba(82,183,136,0.2)"
     },
     {
       cat: "Character spotlight",
@@ -54,8 +56,8 @@ export const Blog = () => {
       date: "April 11",
       verse: "And God said, Let there be light: and there was light.",
       ref: "Genesis 1:3",
-      grad: "from-[#1a1a0d] to-[#12100a]",
-      glow: "rgba(201,168,76,0.04)"
+      grad: "bg-[#C9A84C]/10",
+      glow: "rgba(201,168,76,0.15)"
     },
     {
       cat: "Quiet time",
@@ -65,8 +67,8 @@ export const Blog = () => {
       date: "April 10",
       verse: "I can do all things through Christ which strengtheneth me.",
       ref: "Philippians 4:13",
-      grad: "from-[#101a25] to-[#0a1018]",
-      glow: "rgba(82,82,200,0.04)"
+      grad: "bg-gold/10",
+      glow: "rgba(82,82,200,0.1)"
     }
   ];
 
@@ -78,10 +80,12 @@ export const Blog = () => {
           <Reveal>
             <div className="text-[0.68rem] font-medium tracking-[0.12em] uppercase text-green mb-4">Selah Journal</div>
             <h1 className="font-serif text-5xl lg:text-[5.5rem] font-normal leading-[1.04] tracking-tighter mb-5">
-              Words that<br /><em className="italic text-gold">make you pause.</em>
+              {get('blog_hero_title', 'Words that')}
+              <br />
+              <em className="italic text-gold">{get('blog_hero_accent', 'make you pause.')}</em>
             </h1>
             <p className="text-lg text-text-muted leading-relaxed max-w-[500px]">
-              Devotionals, character spotlights, verse breakdowns, and reflections — written to help you go deeper in the Word, one day at a time.
+              {get('blog_hero_description', 'Devotionals, character spotlights, verse breakdowns, and reflections — written to help you go deeper in the Word, one day at a time.')}
             </p>
           </Reveal>
         </div>
@@ -105,14 +109,14 @@ export const Blog = () => {
 
       {/* FEATURED POST */}
       <section className="grid grid-cols-1 lg:grid-cols-2 border-b border-border min-h-[420px]">
-        <div className="bg-gradient-to-br from-[#0d2a1c] via-[#0d1c14] to-[#0a1510] p-12 flex items-center justify-center relative overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(82,183,136,0.05)_0%,transparent_70%)]" />
+        <div className="bg-surface-2 p-12 flex items-center justify-center relative overflow-hidden border-r border-border">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--border-green)_0%,transparent_70%)] opacity-50" />
           <div className="relative z-10 text-center">
             <Reveal>
-              <div className="font-serif text-2xl lg:text-3xl italic text-text/85 leading-relaxed mb-4">
-                "The LORD is my shepherd; I shall not want. He maketh me to lie down in green pastures."
+              <div className="font-serif text-2xl lg:text-3xl italic text-text leading-relaxed mb-4">
+                "{get('blog_featured_verse', 'The LORD is my shepherd; I shall not want. He maketh me to lie down in green pastures.')}"
               </div>
-              <div className="text-xs text-green tracking-widest uppercase">Psalm 23:1–2 · KJV</div>
+              <div className="text-xs text-green font-medium tracking-widest uppercase">{get('blog_featured_ref', 'Psalm 23:1–2 · KJV')}</div>
             </Reveal>
           </div>
         </div>
@@ -122,10 +126,12 @@ export const Blog = () => {
               Featured · Verse deep dive
             </div>
             <h2 className="font-serif text-3xl lg:text-5xl font-normal leading-tight mb-4">
-              What does it mean<br />to <em className="italic text-gold">lack nothing?</em>
+              {get('blog_featured_title', 'What does it mean')}
+              <br />
+              to <em className="italic text-gold">{get('blog_featured_accent', 'lack nothing?')}</em>
             </h2>
             <p className="text-base text-text-muted leading-relaxed mb-6">
-              Psalm 23 is one of the most memorised passages in scripture — but how often do we actually sit with what it's saying? "I shall not want" is not a prosperity promise. It's a relational declaration. Here's what it actually means.
+              {get('blog_featured_description', 'Psalm 23 is one of the most memorised passages in scripture — but how often do we actually sit with what it\'s saying? "I shall not want" is not a prosperity promise. It\'s a relational declaration. Here\'s what it actually means.')}
             </p>
             <div className="flex items-center gap-3 text-xs text-text-dim mb-6">
               <span>Selah Journal</span>
@@ -152,11 +158,11 @@ export const Blog = () => {
           {posts.map((post, i) => (
             <Reveal key={i} delay={i * 0.1}>
               <div className="bg-surface border border-border rounded-2xl overflow-hidden hover:border-green/20 hover:-translate-y-1 transition-all group">
-                <div className={`h-40 bg-gradient-to-br ${post.grad} flex items-center justify-center relative overflow-hidden p-6`}>
+                <div className={`h-40 ${post.grad} border-b border-border flex items-center justify-center relative overflow-hidden p-6`}>
                   <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse, ${post.glow}, transparent 70%)` }} />
                   <div className="relative z-10 text-center">
-                    <div className="font-serif text-lg italic text-text/70 leading-snug mb-2">{post.verse}</div>
-                    <div className="text-[0.7rem] text-green tracking-widest uppercase">{post.ref}</div>
+                    <div className="font-serif text-lg italic text-text leading-snug mb-2">{post.verse}</div>
+                    <div className="text-[0.7rem] text-green font-semibold tracking-widest uppercase">{post.ref}</div>
                   </div>
                 </div>
                 <div className="p-6">
@@ -179,7 +185,10 @@ export const Blog = () => {
       <section className="bg-surface border-t border-border px-6 lg:px-16 py-20">
         <Reveal>
           <div className="text-[0.68rem] font-medium tracking-[0.12em] uppercase text-green mb-2">Morning devotionals</div>
-          <h2 className="font-serif text-3xl lg:text-4xl font-normal leading-tight mb-10">Short. Deep. <em className="italic text-gold">Daily.</em></h2>
+          <h2 className="font-serif text-3xl lg:text-4xl font-normal leading-tight mb-10">
+            {get('devotionals_title', 'Short. Deep.')}
+            <em className="italic text-gold italic pl-2">{get('devotionals_accent', 'Daily.')}</em>
+          </h2>
         </Reveal>
 
         <div className="space-y-0">
@@ -210,7 +219,11 @@ export const Blog = () => {
       <section className="px-6 lg:px-16 py-20 border-t border-border">
         <Reveal>
           <div className="text-[0.68rem] font-medium tracking-[0.12em] uppercase text-green mb-2">Character spotlights</div>
-          <h2 className="font-serif text-3xl lg:text-4xl font-normal leading-tight mb-10">Ancient lives.<br /><em className="italic text-gold">Living lessons.</em></h2>
+          <h2 className="font-serif text-3xl lg:text-4xl font-normal leading-tight mb-10">
+            {get('spotlight_title', 'Ancient lives.')}
+            <br />
+            <em className="italic text-gold italic">{get('spotlight_accent', 'Living lessons.')}</em>
+          </h2>
         </Reveal>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4">

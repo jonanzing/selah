@@ -3,9 +3,10 @@ import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { AdminLayout } from '../components/admin/AdminLayout';
 import { GlobalSettings } from '../components/admin/tabs/GlobalSettings';
+import { HomePageEditor } from '../components/admin/tabs/HomePageEditor';
+import { JournalSettings } from '../components/admin/tabs/JournalSettings';
 import { MetricsManager } from '../components/admin/tabs/MetricsManager';
 import { AssetManager } from '../components/admin/tabs/AssetManager';
-import { BlogManager } from '../components/admin/tabs/BlogManager';
 import { BibleManager } from '../components/admin/tabs/BibleManager';
 import { Loader2 } from 'lucide-react';
 
@@ -15,7 +16,16 @@ export const AdminPage: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Timeout fallback to prevent indefinite loading if Supabase hangs
+    const timeoutId = setTimeout(() => {
+      if (loading) {
+        setLoading(false);
+        navigate('/admin/login');
+      }
+    }, 5000);
+
     supabase.auth.getSession().then(({ data: { session } }) => {
+      clearTimeout(timeoutId);
       if (session && session.user.email !== 'nanzingj@gmail.com') {
         supabase.auth.signOut();
         navigate('/admin/login');
@@ -30,6 +40,7 @@ export const AdminPage: React.FC = () => {
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       if (session && session.user.email !== 'nanzingj@gmail.com') {
+        console.error('Access denied for:', session.user.email);
         supabase.auth.signOut();
         navigate('/admin/login');
         return;
@@ -40,7 +51,10 @@ export const AdminPage: React.FC = () => {
       }
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      subscription.unsubscribe();
+      clearTimeout(timeoutId);
+    };
   }, [navigate]);
 
   if (loading) {
@@ -58,9 +72,10 @@ export const AdminPage: React.FC = () => {
       <Routes>
         <Route path="/" element={<Navigate to="settings" />} />
         <Route path="settings" element={<GlobalSettings />} />
+        <Route path="home" element={<HomePageEditor />} />
+        <Route path="blog" element={<JournalSettings />} />
         <Route path="metrics" element={<MetricsManager />} />
         <Route path="assets" element={<AssetManager />} />
-        <Route path="blog" element={<BlogManager />} />
         <Route path="bible" element={<BibleManager />} />
       </Routes>
     </AdminLayout>

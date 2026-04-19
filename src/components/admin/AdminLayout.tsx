@@ -17,11 +17,12 @@ interface AdminLayoutProps {
 }
 
 const menuItems = [
-  { id: 'global', label: 'Global Settings', icon: Settings2, path: '/admin/settings' },
-  { id: 'metrics', label: 'Metrics & Waitlist', icon: BarChart3, path: '/admin/metrics' },
-  { id: 'assets', label: 'Asset Manager', icon: ImageIcon, path: '/admin/assets' },
-  { id: 'blog', label: 'Blog Manager', icon: BookOpen, path: '/admin/blog' },
-  { id: 'bible', label: 'Bible & Content', icon: Database, path: '/admin/bible' },
+  { id: 'branding', label: 'Branding & SEO', icon: Settings2, path: '/admin/settings' },
+  { id: 'home', label: 'Home Page', icon: ImageIcon, path: '/admin/home' },
+  { id: 'blog', label: 'Journal & Stories', icon: BookOpen, path: '/admin/blog' },
+  { id: 'metrics', label: 'Growth & Waitlist', icon: BarChart3, path: '/admin/metrics' },
+  { id: 'assets', label: 'Media Assets', icon: Database, path: '/admin/assets' },
+  { id: 'bible', label: 'Bible Content', icon: Database, path: '/admin/bible' },
 ];
 
 export const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
@@ -39,8 +40,8 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
       <aside className="w-72 border-r border-black/5 flex flex-col bg-white/50 backdrop-blur-sm">
         <div className="p-8 border-bottom border-black/5">
           <Link to="/admin" className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-[#1a1a1a] flex items-center justify-center rounded-sm">
-              <span className="text-[#f5f2ed] font-bold text-xl tracking-tighter">S.</span>
+            <div className="w-10 h-10 bg-white border border-black/5 flex items-center justify-center rounded-sm p-1.5 shadow-sm">
+              <img src="/favicon.svg" alt="Selah Logo" className="w-full h-full object-contain" />
             </div>
             <div>
               <h1 className="text-sm font-bold tracking-widest uppercase">Selah.</h1>

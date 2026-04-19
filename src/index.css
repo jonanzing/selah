@@ -22,14 +22,14 @@
 .light {
   --black: #F5F0E8;
   --surface: #FFFFFF;
-  --surface-2: #F0EBE0;
-  --surface-3: #E8E3D8;
-  --text: #080808;
-  --text-muted: rgba(8, 8, 8, 0.65);
-  --text-dim: rgba(8, 8, 8, 0.4);
-  --border: rgba(8, 8, 8, 0.1);
-  --border-green: rgba(45, 106, 79, 0.2);
-  --border-gold: rgba(201, 168, 76, 0.3);
+  --surface-2: #EBE5D8;
+  --surface-3: #E0DACD;
+  --text: #050505;
+  --text-muted: rgba(5, 5, 5, 0.75);
+  --text-dim: rgba(5, 5, 5, 0.45);
+  --border: rgba(5, 5, 5, 0.08);
+  --border-green: rgba(45, 106, 79, 0.15);
+  --border-gold: rgba(201, 168, 76, 0.25);
 }
 
 @theme {

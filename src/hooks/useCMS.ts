@@ -4,13 +4,15 @@ import { supabase } from '../lib/supabase';
 export function useCMS() {
   const [content, setContent] = useState<Record<string, string>>({});
   const [metrics, setMetrics] = useState<any[]>([]);
+  const [mockups, setMockups] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
-      const [settingsRes, metricsRes] = await Promise.all([
+      const [settingsRes, metricsRes, mockupsRes] = await Promise.all([
         supabase.from('site_settings').select('*'),
-        supabase.from('metrics').select('*').order('display_order')
+        supabase.from('metrics').select('*').order('display_order'),
+        supabase.from('mockups').select('*').order('display_order')
       ]);
 
       if (settingsRes.data) {
@@ -24,6 +26,10 @@ export function useCMS() {
       if (metricsRes.data) {
         setMetrics(metricsRes.data);
       }
+
+      if (mockupsRes.data) {
+        setMockups(mockupsRes.data);
+      }
       
       setLoading(false);
     }
@@ -35,5 +41,5 @@ export function useCMS() {
     return content[key] || fallback;
   };
 
-  return { get, metrics, loading };
+  return { get, metrics, mockups, loading };
 }

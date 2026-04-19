@@ -190,23 +190,23 @@ export const Home = () => {
         </Reveal>
         <Reveal delay={0.1}>
           <h2 className="font-serif text-5xl lg:text-7xl font-normal leading-tight mb-5 text-balance">
-            Everything you need<br />to go deeper.
+            {get('features_title', 'Everything you need to go deeper.')}
           </h2>
         </Reveal>
         <Reveal delay={0.2}>
           <p className="text-lg text-text-muted leading-relaxed max-w-[480px]">
-            From your first verse of the morning to your last prayer at night — Selah walks with you through the Word, every single day.
+            {get('features_description', 'From your first verse of the morning to your last prayer at night — Selah walks with you through the Word, every single day.')}
           </p>
         </Reveal>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 mt-16 border border-border rounded-2xl overflow-hidden bg-border">
           {[
-            { icon: <BookOpen />, title: "Verse of the day", desc: "A fresh scripture every morning with likes, comments, and AI-generated graphic quotes you can post." },
-            { icon: <Users />, title: "Character of the day", desc: "One biblical character, one life lesson. Ruth, David, Esther, Paul — their stories become your guide." },
-            { icon: <LayoutIcon />, title: "Full Bible reader", desc: "Multiple translations, highlights, AI explanations on demand, and live reading sessions." },
-            { icon: <Mic />, title: "Smart notes", desc: "Sunday sermons, quiet time, journals — speak and AI organises it, or type with Bible passages referenced." },
-            { icon: <Globe />, title: "The Commons", desc: "A faith-first social feed. Post verses, prayers, notes. React with Amen, Pray, Thanks, or Truth." },
-            { icon: <Flame />, title: "Streaks & coins", desc: "Track your daily reading streak on a fire calendar. Earn coins. Stay consistent. Stay burning." }
+            { icon: <BookOpen />, title: get('feat_1_title', "Verse of the day"), desc: get('feat_1_desc', "A fresh scripture every morning with likes, comments, and AI-generated graphic quotes you can post.") },
+            { icon: <Users />, title: get('feat_2_title', "Character of the day"), desc: get('feat_2_desc', "One biblical character, one life lesson. Ruth, David, Esther, Paul — their stories become your guide.") },
+            { icon: <LayoutIcon />, title: get('feat_3_title', "Full Bible reader"), desc: get('feat_3_desc', "Multiple translations, highlights, AI explanations on demand, and live reading sessions.") },
+            { icon: <Mic />, title: get('feat_4_title', "Smart notes"), desc: get('feat_4_desc', "Sunday sermons, quiet time, journals — speak and AI organises it, or type with Bible passages referenced.") },
+            { icon: <Globe />, title: get('feat_5_title', "The Commons"), desc: get('feat_5_desc', "A faith-first social feed. Post verses, prayers, notes. React with Amen, Pray, Thanks, or Truth.") },
+            { icon: <Flame />, title: get('feat_6_title', "Streaks & coins"), desc: get('feat_6_desc', "Track your daily reading streak on a fire calendar. Earn coins. Stay consistent. Stay burning.") }
           ].map((feat, idx) => (
           <motion.div 
             key={idx} 
@@ -231,11 +231,11 @@ export const Home = () => {
           </Reveal>
           <Reveal delay={0.1}>
             <h2 className="font-serif text-5xl lg:text-7xl font-normal leading-tight mb-4 mx-auto max-w-[600px]">
-              Every screen, <em className="italic text-gold">crafted with care.</em>
+              Every screen, <em className="italic text-gold">{get('showcase_accent', 'crafted with care.')}</em>
             </h2>
           </Reveal>
           <Reveal delay={0.2}>
-            <p className="text-text-muted">Clean. Intentional. Built for the Word.</p>
+            <p className="text-text-muted">{get('showcase_subtext', 'Clean. Intentional. Built for the Word.')}</p>
           </Reveal>
         </div>
 
@@ -263,14 +263,14 @@ export const Home = () => {
             <div>
               <div className="text-[0.7rem] font-medium tracking-[0.12em] uppercase text-green mb-4">Bible reader</div>
               <h2 className="font-serif text-5xl lg:text-6xl font-normal leading-tight mb-6">Read together.<br /><em className="italic text-gold">Live.</em></h2>
-              <p className="text-lg text-text-muted leading-relaxed mb-8">Open any book. Read with friends in real time. Highlight, take notes, ask AI to explain — then share what moves you as a quote graphic.</p>
+              <p className="text-lg text-text-muted leading-relaxed mb-8">{get('section_reader_desc', 'Open any book. Read with friends in real time. Highlight, take notes, ask AI to explain — then share what moves you as a quote graphic.')}</p>
               
               <div className="space-y-5">
                 {[
-                  { t: "Multiple translations", d: "KJV, NIV, NLT and more — switch instantly without losing your place." },
-                  { t: "Live reading rooms", d: "See exactly where your friends are on the page. Same verse, same moment." },
-                  { t: "AI explanations on tap", d: "Tap any verse for historical context, meaning, and plain-language breakdown." },
-                  { t: "Graphic generator", d: "Turn any verse into a beautiful shareable quote graphic in seconds." }
+                  { t: get('reader_feat_1_title', "Multiple translations"), d: get('reader_feat_1_desc', "KJV, NIV, NLT and more — switch instantly without losing your place.") },
+                  { t: get('reader_feat_2_title', "Live reading rooms"), d: get('reader_feat_2_desc', "See exactly where your friends are on the page. Same verse, same moment.") },
+                  { t: get('reader_feat_3_title', "AI explanations on tap"), d: get('reader_feat_3_desc', "Tap any verse for historical context, meaning, and plain-language breakdown.") },
+                  { t: get('reader_feat_4_title', "Graphic generator"), d: get('reader_feat_4_desc', "Turn any verse into a beautiful shareable quote graphic in seconds.") }
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-4">
                     <div className="w-5 h-5 rounded-full bg-green/10 border border-border-green flex items-center justify-center shrink-0 mt-1">
@@ -288,7 +288,7 @@ export const Home = () => {
           <div className="flex justify-center">
             <Reveal delay={0.2}>
               <div className="screen-phone">
-                <img src={readerImg} alt="Bible reader" className="w-full h-full object-cover" />
+                <img src={get('asset_reader_show', readerImg)} alt="Bible reader" className="w-full h-full object-cover" />
               </div>
             </Reveal>
           </div>
@@ -301,15 +301,21 @@ export const Home = () => {
           <div className="order-2 lg:order-1 flex justify-center">
             <Reveal delay={0.2}>
               <div className="screen-phone">
-                <img src={socialsImg} alt="Community feed" className="w-full h-full object-cover" />
+                <img src={get('asset_socials_show', socialsImg)} alt="Community feed" className="w-full h-full object-cover" />
               </div>
             </Reveal>
           </div>
           <div className="order-1 lg:order-2">
             <Reveal>
               <div className="text-[0.7rem] font-medium tracking-[0.12em] uppercase text-green mb-4">The Commons</div>
-              <h2 className="font-serif text-5xl lg:text-6xl font-normal leading-tight mb-6">A community that<br /><em className="italic text-gold">believes together.</em></h2>
-              <p className="text-lg text-text-muted leading-relaxed mb-8">Post verses, prayers, notes, and reflections. React with meaning. Join live prayer rooms. Study with hundreds of believers.</p>
+              <h2 className="font-serif text-5xl lg:text-6xl font-normal leading-tight mb-6">
+                {get('community_title', 'A community that')}
+                <br />
+                <em className="italic text-gold">{get('community_accent', 'believes together.')}</em>
+              </h2>
+              <p className="text-lg text-text-muted leading-relaxed mb-8">
+                {get('community_description', 'Post verses, prayers, notes, and reflections. React with meaning. Join live prayer rooms. Study with hundreds of believers.')}
+              </p>
               
               <div className="text-sm text-text-muted mb-4">React with more than a heart:</div>
               <div className="flex flex-wrap gap-2 mb-8">
@@ -330,10 +336,10 @@ export const Home = () => {
                     <div className="text-[0.7rem] text-text-muted">Goes to <span className="text-green">Grace Community · Austin</span></div>
                   </div>
                 </div>
-                <p className="text-sm text-text-muted leading-relaxed mb-4">Lord, give our pastors rest tonight. Guard their minds and knit this city together in peace. Amen.</p>
+                <p className="text-sm text-text-muted leading-relaxed mb-4">{get('social_quote_text', 'Lord, give our pastors rest tonight. Guard their minds and knit this city together in peace. Amen.')}</p>
                 <div className="bg-surface-3 border border-border rounded-xl p-4 mb-4">
-                  <div className="text-sm font-medium mb-1">Sabbath margin</div>
-                  <div className="text-xs text-text-muted leading-relaxed italic">"Sabbath margin isn't laziness; it is making room for God to be God while I remember I am dust..."</div>
+                  <div className="text-sm font-medium mb-1">{get('social_quote_sub_title', 'Sabbath margin')}</div>
+                  <div className="text-xs text-text-muted leading-relaxed italic">{get('social_quote_sub_text', '"Sabbath margin isn\'t laziness; it is making room for God to be God while I remember I am dust..."')}</div>
                 </div>
                 <div className="flex gap-2">
                   <div className="px-3 py-1 bg-green/10 border border-border-green rounded-full text-[0.7rem] text-green">🏛 48</div>
@@ -352,15 +358,23 @@ export const Home = () => {
             <div className="font-serif text-7xl lg:text-[7rem] font-light text-text/15 leading-none tracking-tighter mb-2">Se<em className="italic text-gold not-italic">lah.</em></div>
             <div className="text-[0.7rem] text-text-dim tracking-widest mb-8 uppercase">/ ˈsiːlə / · Hebrew · found 74× in the Psalms</div>
             <p className="text-base text-text-muted leading-loose max-w-md">
-              A musical and liturgical notation meaning <em className="italic text-gold-light not-italic">"pause and reflect"</em> — a divine instruction to stop, be still, and let the weight of the Word settle in your soul.<br /><br />That's exactly what this app invites you to do. Every single day.
+              {get('about_description', 'A musical and liturgical notation meaning "pause and reflect" — a divine instruction to stop, be still, and let the weight of the Word settle in your soul.')}
+              <br /><br />
+              {get('about_description_2', "That's exactly what this app invites you to do. Every single day.")}
             </p>
           </Reveal>
         </div>
         <div className="p-12 lg:p-24 flex flex-col justify-center">
           <Reveal delay={0.1}>
             <div className="text-[0.7rem] font-medium tracking-[0.12em] uppercase text-green mb-4">Our mission</div>
-            <h2 className="font-serif text-4xl lg:text-5xl font-normal leading-tight mb-6">Built for a generation<br />that wants depth,<br /><em className="italic text-gold">not just content.</em></h2>
-            <p className="text-sm text-text-muted leading-relaxed max-w-md mb-10">Most Bible apps feel like reference tools. Selah is a companion. It remembers your notes, keeps your streak warm, connects you to a reading community, and helps you understand — not just read — the Word.</p>
+            <h2 className="font-serif text-4xl lg:text-5xl font-normal leading-tight mb-6">
+              {get('mission_title', 'Built for a generation that wants depth,')}
+              <br />
+              <em className="italic text-gold">{get('mission_accent', 'not just content.')}</em>
+            </h2>
+            <p className="text-sm text-text-muted leading-relaxed max-w-md mb-10">
+              {get('mission_description', 'Most Bible apps feel like reference tools. Selah is a companion. It remembers your notes, keeps your streak warm, connects you to a reading community, and helps you understand — not just read — the Word.')}
+            </p>
             
             <div className="flex gap-10 pt-8 border-t border-border">
               <div>
