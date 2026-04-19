@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
 import { cn } from '../../lib/utils';
-import { Lock, User, ArrowRight } from 'lucide-react';
+import { Lock, User, ArrowRight, Eye, EyeOff, ArrowLeft } from 'lucide-react';
 
 export const AdminLogin: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
@@ -15,6 +16,13 @@ export const AdminLogin: React.FC = () => {
     e.preventDefault();
     setLoading(true);
     setError(null);
+
+    // Strict Admin Email Check
+    if (email.toLowerCase() !== 'nanzingj@gmail.com') {
+      setError('Unauthorized: Administrative access restricted.');
+      setLoading(false);
+      return;
+    }
 
     const { error } = await supabase.auth.signInWithPassword({ email, password });
 
@@ -27,7 +35,16 @@ export const AdminLogin: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#f5f2ed] flex flex-col items-center justify-center p-4 selection:bg-[#1a1a1a] selection:text-[#f5f2ed]">
+    <div className="min-h-screen bg-[#f5f2ed] flex flex-col items-center justify-center p-4 selection:bg-[#1a1a1a] selection:text-[#f5f2ed] relative">
+      {/* Return to Site Button */}
+      <Link 
+        to="/" 
+        className="absolute top-8 left-8 flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] font-bold text-black/40 hover:text-black transition-colors group"
+      >
+        <ArrowLeft className="w-3 h-3 transition-transform group-hover:-translate-x-1" />
+        Return to site
+      </Link>
+
       <div className="w-full max-w-sm">
         <div className="flex flex-col items-center mb-12">
           <div className="w-16 h-16 bg-[#1a1a1a] flex items-center justify-center rounded-sm mb-6 shadow-2xl">
@@ -47,7 +64,8 @@ export const AdminLogin: React.FC = () => {
               placeholder="Administrator Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full bg-white border border-black/5 rounded-sm h-14 pl-12 pr-4 text-xs font-medium uppercase tracking-widest focus:outline-none focus:border-black/20 transition-all placeholder:text-black/20"
+              autoCapitalize="none"
+              className="w-full bg-white border border-black/5 rounded-sm h-14 pl-12 pr-4 text-xs font-medium tracking-widest focus:outline-none focus:border-black/20 transition-all placeholder:text-black/20"
               required
             />
           </div>
@@ -55,13 +73,21 @@ export const AdminLogin: React.FC = () => {
           <div className="relative group">
             <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-black/20 group-focus-within:text-black transition-colors" />
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Access Key"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full bg-white border border-black/5 rounded-sm h-14 pl-12 pr-4 text-xs font-medium uppercase tracking-widest focus:outline-none focus:border-black/20 transition-all placeholder:text-black/20"
+              className="w-full bg-white border border-black/5 rounded-sm h-14 pl-12 pr-12 text-xs font-medium tracking-widest focus:outline-none focus:border-black/20 transition-all placeholder:text-black/20"
               required
             />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-black/20 hover:text-black transition-colors p-1"
+              aria-label={showPassword ? "Hide password" : "Show password"}
+            >
+              {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+            </button>
           </div>
 
           {error && (

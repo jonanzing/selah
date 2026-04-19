@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { Sun, Moon } from 'lucide-react';
 
@@ -51,6 +51,27 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
   const [scrolled, setScrolled] = useState(false);
   const [isLight, setIsLight] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+
+  // Secret Admin Access Logic
+  const coachRef = useRef<{ count: number; lastTap: number }>({ count: 0, lastTap: 0 });
+
+  const handleSecretTap = (e: React.MouseEvent | React.TouchEvent) => {
+    // Prevent default if it's a double tap on mobile zoom etc
+    const now = Date.now();
+    if (now - coachRef.current.lastTap > 2000) {
+      coachRef.current.count = 1;
+    } else {
+      coachRef.current.count += 1;
+    }
+    
+    coachRef.current.lastTap = now;
+
+    if (coachRef.current.count >= 5) {
+      coachRef.current.count = 0; // Reset
+      navigate('/admin/login');
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -82,8 +103,11 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
           scrolled ? 'bg-black/92 backdrop-blur-2xl border-b border-border' : 'bg-black/50 backdrop-blur-xl border-b border-transparent'
         }`}
       >
-        <Link to="/" className="flex items-center gap-2 font-serif text-2xl font-medium tracking-tight group">
-          <div className="w-8 h-8 transition-transform group-hover:scale-110">
+        <div 
+          onClick={handleSecretTap}
+          className="flex items-center gap-2 font-serif text-2xl font-medium tracking-tight group cursor-pointer select-none"
+        >
+          <div className="w-8 h-8 transition-transform group-hover:scale-110 pointer-events-none">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
               <path d="M12.2031 1.09025C12.0738 1.03279 11.9262 1.03279 11.7969 1.09025L3.29693 4.86803C3.11637 4.94828 3 5.12734 3 5.32494V11C3 16.4571 6.74101 21.6189 11.8787 22.9689C11.9581 22.9898 12.0419 22.9898 12.1213 22.9689C17.259 21.6189 21 16.4571 21 11V5.32494C21 5.12734 20.8836 4.94828 20.7031 4.86803L12.2031 1.09025ZM16 9.5C16 9.77614 15.7761 10 15.5 10H13.5C13.2239 10 13 10.2239 13 10.5V17.5C13 17.7761 12.7761 18 12.5 18H11.5C11.2239 18 11 17.7761 11 17.5V10.5C11 10.2239 10.7761 10 10.5 10H8.5C8.22386 10 8 9.77614 8 9.5V8.5C8 8.22386 8.22386 8 8.5 8H10.5C10.7761 8 11 7.77614 11 7.5V5.5C11 5.22386 11.2239 5 11.5 5H12.5C12.7761 5 13 5.22386 13 5.5V7.5C13 7.77614 13.2239 8 13.5 8H15.5C15.7761 8 16 8.22386 16 8.5V9.5Z" fill="url(#nav_paint0_linear)"/>
               <defs>
@@ -95,8 +119,8 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
               </defs>
             </svg>
           </div>
-          <span>Selah<span className="text-green">.</span></span>
-        </Link>
+          <span className="pointer-events-none">Selah<span className="text-green">.</span></span>
+        </div>
         <ul className="hidden md:flex items-center gap-10 list-none">
           <li>
             <Link 

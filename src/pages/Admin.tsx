@@ -16,6 +16,11 @@ export const AdminPage: React.FC = () => {
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session && session.user.email !== 'nanzingj@gmail.com') {
+        supabase.auth.signOut();
+        navigate('/admin/login');
+        return;
+      }
       setSession(session);
       setLoading(false);
       if (!session) {
@@ -24,6 +29,11 @@ export const AdminPage: React.FC = () => {
     });
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session && session.user.email !== 'nanzingj@gmail.com') {
+        supabase.auth.signOut();
+        navigate('/admin/login');
+        return;
+      }
       setSession(session);
       if (!session) {
         navigate('/admin/login');
