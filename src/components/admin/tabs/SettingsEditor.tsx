@@ -22,6 +22,7 @@ export const SettingsEditor: React.FC<SettingsEditorProps> = ({ title, descripti
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     fetchSettings();
@@ -38,6 +39,9 @@ export const SettingsEditor: React.FC<SettingsEditorProps> = ({ title, descripti
       const map = data.reduce((acc, curr) => ({ ...acc, [curr.key]: curr.value }), {});
       setSettings(map);
       setOriginalSettings(map);
+    } else if (error) {
+      setMessage('Failed to fetch settings');
+      setIsError(true);
     }
     setLoading(false);
   };
@@ -50,13 +54,18 @@ export const SettingsEditor: React.FC<SettingsEditorProps> = ({ title, descripti
 
   const saveSettings = async () => {
     setSaving(true);
+    setMessage(null);
+    setIsError(false);
+    
     const updates = Object.entries(settings).map(([key, value]) => ({ key, value }));
     const { error } = await supabase.from('site_settings').upsert(updates);
     
     if (error) {
       setMessage('Error saving changes');
+      setIsError(true);
     } else {
       setMessage('Changes deployed successfully');
+      setIsError(false);
       setOriginalSettings(settings);
       setTimeout(() => setMessage(null), 3000);
     }
@@ -178,7 +187,14 @@ export const SettingsEditor: React.FC<SettingsEditorProps> = ({ title, descripti
           </div>
           
           <div className="flex items-center gap-4">
-            {message && <span className="text-[10px] uppercase tracking-widest font-bold text-emerald-400">{message}</span>}
+            {message && (
+              <span className={cn(
+                "text-[10px] uppercase tracking-widest font-bold",
+                isError ? "text-red-400" : "text-emerald-400"
+              )}>
+                {message}
+              </span>
+            )}
             <button
               onClick={() => setSettings(originalSettings)}
               className="px-6 py-2 text-xs font-bold uppercase tracking-widest text-white/40 hover:text-white transition-colors"

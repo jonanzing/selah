@@ -64,7 +64,7 @@ export const AdminLogin: React.FC = () => {
       <div className="w-full max-w-sm">
         <div className="flex flex-col items-center mb-12">
           <div className="w-16 h-16 bg-white border border-black/10 flex items-center justify-center rounded-sm mb-6 shadow-xl p-2.5">
-            <img src="/favicon.svg" alt="Selah Logo" className="w-full h-full object-contain" />
+            <img src="/favicon.svg" alt="Selah Logo" className="w-full h-full object-contain" referrerPolicy="no-referrer" />
           </div>
           <h1 className="text-sm font-bold tracking-[0.3em] uppercase mb-2">Selah Admin</h1>
           <p className="text-[10px] text-black/40 uppercase tracking-[0.2em] font-medium text-center">

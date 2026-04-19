@@ -8,6 +8,8 @@ export const BlogManager: React.FC = () => {
   const [editingPost, setEditingPost] = useState<BlogPost | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [message, setMessage] = useState<string | null>(null);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     fetchPosts();
@@ -18,6 +20,9 @@ export const BlogManager: React.FC = () => {
     const { data, error } = await supabase.from('blog_posts').select('*').order('created_at', { ascending: false });
     if (!error && data) {
       setPosts(data as BlogPost[]);
+    } else if (error) {
+      setMessage('Failed to fetch posts');
+      setIsError(true);
     }
     setLoading(false);
   };
@@ -34,15 +39,28 @@ export const BlogManager: React.FC = () => {
       created_at: new Date().toISOString()
     };
     setEditingPost(newPost);
+    setMessage(null);
+    setIsError(false);
   };
 
   const savePost = async () => {
     if (!editingPost) return;
     setSaving(true);
+    setMessage(null);
+    setIsError(false);
+
     const { error } = await supabase.from('blog_posts').upsert(editingPost);
-    if (!error) {
+    if (error) {
+      setMessage('Error saving article');
+      setIsError(true);
+    } else {
+      setMessage('Article published successfully');
+      setIsError(false);
       await fetchPosts();
-      setEditingPost(null);
+      setTimeout(() => {
+        setEditingPost(null);
+        setMessage(null);
+      }, 1500);
     }
     setSaving(false);
   };
@@ -80,14 +98,24 @@ export const BlogManager: React.FC = () => {
             >
               Cancel
             </button>
-            <button
-              onClick={savePost}
-              disabled={saving}
-              className="bg-[#1a1a1a] text-[#f5f2ed] px-8 py-3 rounded-full flex items-center gap-2 hover:shadow-xl transition-all"
-            >
-              {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Check className="w-4 h-4" />}
-              <span className="text-xs font-bold uppercase tracking-widest">Publish Post</span>
-            </button>
+            <div className="flex items-center gap-6">
+              {message && (
+                <span className={cn(
+                  "text-[10px] uppercase tracking-widest font-bold animate-in fade-in zoom-in-95",
+                  isError ? "text-red-500" : "text-emerald-500"
+                )}>
+                  {message}
+                </span>
+              )}
+              <button
+                onClick={savePost}
+                disabled={saving}
+                className="bg-[#1a1a1a] text-[#f5f2ed] px-8 py-3 rounded-full flex items-center gap-2 hover:shadow-xl transition-all"
+              >
+                {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Check className="w-4 h-4" />}
+                <span className="text-xs font-bold uppercase tracking-widest">Publish Post</span>
+              </button>
+            </div>
           </div>
 
           <div className="space-y-8 max-w-2xl mx-auto">

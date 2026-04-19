@@ -7,7 +7,8 @@ import {
   BookOpen, 
   Database, 
   LogOut,
-  ChevronRight
+  ChevronRight,
+  ArrowLeft
 } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { cn } from '../../lib/utils';
@@ -37,20 +38,28 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
   return (
     <div className="flex h-screen bg-[#f5f2ed] text-[#1a1a1a] font-sans selection:bg-[#1a1a1a] selection:text-[#f5f2ed]">
       {/* Sidebar */}
-      <aside className="w-72 border-r border-black/5 flex flex-col bg-white/50 backdrop-blur-sm">
-        <div className="p-8 border-bottom border-black/5">
+      <aside className="w-72 border-r border-black/5 flex flex-col bg-[#ffffff] shadow-sm z-20">
+        <div className="p-8 space-y-6 border-b border-black/5">
           <Link to="/admin" className="flex items-center gap-3">
             <div className="w-10 h-10 bg-white border border-black/5 flex items-center justify-center rounded-sm p-1.5 shadow-sm">
-              <img src="/favicon.svg" alt="Selah Logo" className="w-full h-full object-contain" />
+              <img src="/favicon.svg" alt="Selah Logo" className="w-full h-full object-contain" referrerPolicy="no-referrer" />
             </div>
             <div>
               <h1 className="text-sm font-bold tracking-widest uppercase">Selah.</h1>
               <p className="text-[10px] text-black/40 uppercase tracking-widest">Administrator</p>
             </div>
           </Link>
+
+          <Link 
+            to="/" 
+            className="flex items-center gap-2 w-full px-4 py-3 bg-[#1a1a1a] text-[#f5f2ed] rounded-sm transition-all hover:bg-black group shadow-lg"
+          >
+            <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-1" />
+            <span className="text-[10px] font-bold uppercase tracking-widest">Return to Site</span>
+          </Link>
         </div>
 
-        <nav className="flex-1 px-4 py-8">
+        <nav className="flex-1 px-4 py-8 overflow-y-auto custom-scrollbar">
           <ul className="space-y-2">
             {menuItems.map((item) => {
               const isActive = location.pathname === item.path;
@@ -89,8 +98,8 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
       </aside>
 
       {/* Content area */}
-      <main className="flex-1 overflow-y-auto overflow-x-hidden">
-        <header className="h-20 border-b border-black/5 flex items-center justify-between px-12 sticky top-0 bg-[#f5f2ed]/80 backdrop-blur-md z-10">
+      <main className="flex-1 overflow-y-auto overflow-x-hidden bg-[#f5f2ed]">
+        <header className="h-20 border-b border-black/5 flex items-center justify-between px-12 sticky top-0 bg-[#f5f2ed] z-50">
           <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-black/40">
             {menuItems.find(m => m.path === location.pathname)?.label || 'Dashboard'}
           </h2>
@@ -100,7 +109,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
           </div>
         </header>
 
-        <div className="max-w-6xl mx-auto p-12">
+        <div className="max-w-6xl mx-auto p-12 pb-32">
           {children}
         </div>
       </main>
