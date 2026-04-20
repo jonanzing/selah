@@ -401,35 +401,21 @@ export const Home = () => {
             <h2 className="font-serif text-5xl lg:text-6xl font-normal leading-tight mb-4">Be the first to<br /><em className="italic text-gold">open Selah.</em></h2>
             <p className="text-text-muted text-lg leading-relaxed mb-10">Selah is a bible app built for daily encounter to Transform your daily study into a shared journey. Track your streaks, join live prayer rooms, and unlock deeper scriptural insights with a beautifully designed, modern study workspace.</p>
             
-            <form 
-              action="https://formsubmit.co/nanzingj@gmail.com" 
-              method="POST" 
-              className="flex flex-col sm:flex-row gap-2 max-w-[480px] mx-auto"
-            >
-              <input type="hidden" name="_autoresponse" value="Hi there! Thank you so much for requesting early access to Selah. We are thrilled to have you on board! We are currently putting the finishing touches on our workspace, designed specifically to help leaders and speakers study and organize texts without the usual friction. Since you are on the waitlist, you will be among the very first to know when we open our doors. If you have any thoughts or questions in the meantime, feel free to reply directly to this email. Warmly, The Selah Team" />
-              <input type="hidden" name="_subject" value="New Waitlist Signup for Selah!" />
-              <input type="hidden" name="_next" value="https://www.myselahh.com" />
-              
-              <input 
-                type="email" 
-                name="email"
-                required
-                className="flex-1 bg-surface border border-border rounded-full px-6 py-3.5 text-text placeholder:text-text-dim outline-none focus:border-green/40 transition-colors" 
-                placeholder="your@email.com"
+            <div className="max-w-[480px] mx-auto mt-10 p-2 bg-white rounded-2xl shadow-2xl overflow-hidden border border-border group hover:border-gold/30 transition-all duration-500">
+              <iframe 
+                src="https://fealmedia.substack.com/embed" 
+                width="100%" 
+                height="320" 
+                style={{ 
+                  border: '1px solid #EEE', 
+                  background: 'white',
+                  borderRadius: '12px'
+                }} 
+                frameBorder="0" 
+                scrolling="no"
+                title="Selah Substack"
               />
-              <motion.button 
-                type="submit" 
-                whileHover={{ scale: 0.98 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-gold text-black px-7 py-3.5 rounded-full font-medium whitespace-nowrap hover:bg-gold-light transition-all"
-              >
-                Get early access
-              </motion.button>
-            </form>
-            
-            <p className="text-xs mt-4 transition-colors text-text-dim">
-              No spam, ever. Just your personal invite when it's time.
-            </p>
+            </div>
 
             <div className="flex items-center justify-center gap-3 mt-12">
               <div className="flex -space-x-2.5">
