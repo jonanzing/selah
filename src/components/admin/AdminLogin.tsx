@@ -35,16 +35,34 @@ export const AdminLogin: React.FC = () => {
       return;
     }
 
+    // Debug check: Are keys valid?
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+    const isConfigured = supabaseUrl && !supabaseUrl.includes('placeholder');
+
+    if (!isConfigured) {
+      setError('CONFIGURATION ERROR: Supabase API keys are missing or invalid. Please add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in the AI Studio "Settings" menu.');
+      setLoading(false);
+      return;
+    }
+
     try {
       const { error } = await supabase.auth.signInWithPassword({ email, password });
 
       if (error) {
-        setError(`${error.message}. Ensure you have registered this account in the Supabase Auth dashboard.`);
+        if (error.message.includes('Failed to fetch')) {
+          setError('NETWORK ERROR: Failed to reach Supabase. This usually means your VITE_SUPABASE_URL is incorrect (Check for trailing slashes) or your Supabase project is paused.');
+        } else {
+          setError(`${error.message}. Ensure you have created the account "nanzingj@gmail.com" in the Supabase Auth dashboard.`);
+        }
       } else {
         navigate('/admin/settings');
       }
-    } catch (err) {
-      setError('Connection failed. Please check your internet or Supabase status.');
+    } catch (err: any) {
+      if (err?.message?.includes('Failed to fetch')) {
+        setError('NETWORK ERROR: Failed to reach Supabase. Check your Project Settings for a valid URL.');
+      } else {
+        setError('Connection failed. Please check your internet or Supabase status.');
+      }
     } finally {
       setLoading(false);
     }
